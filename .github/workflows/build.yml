@@ -1,0 +1,17 @@
+name: Build Docker Image
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04${{matrix.arch=='arm64' && '-arm' || ''}}
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [ 'amd64', 'arm64' ]
+    steps:
+
+      - name: Build and push
+        uses: docker/build-push-action@v6

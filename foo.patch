@@ -1,0 +1,22 @@
+Index: src/library/grDevices/src/devPS.c
+===================================================================
+--- src/library/grDevices/src/devPS.c	(revision 89733)
++++ src/library/grDevices/src/devPS.c	(working copy)
+@@ -3743,7 +3743,7 @@
+ 	    pd->psfp = R_popen(pd->command, "w");
+ 	    pd->open_type = 1;
+ 	}
+-	if (!pd->psfp || errno != 0) {
++	if (!pd->psfp) {
+ 	    char errbuf[strlen(pd->command) + 1];
+ 	    strcpy(errbuf, pd->command);
+ 	    PS_cleanup(4, dd, pd);
+@@ -3754,7 +3754,7 @@
+ 	errno = 0;
+ 	pd->psfp = R_popen(pd->filename + 1, "w");
+ 	pd->open_type = 1;
+-	if (!pd->psfp || errno != 0) {
++	if (!pd->psfp) {
+ 	    char errbuf[strlen(pd->filename + 1) + 1];
+ 	    strcpy(errbuf, pd->filename + 1);
+ 	    PS_cleanup(4, dd, pd);

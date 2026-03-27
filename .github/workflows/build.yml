@@ -23,6 +23,5 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: image/
           push: true
           tags: ghcr.io/aitap/ubuntu-gs-bug:latest

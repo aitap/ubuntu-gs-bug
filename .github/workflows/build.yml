@@ -15,7 +15,7 @@ jobs:
 
       - name: run
         run: |
-          sudo apt-get update -y && apt-get install -y strace r-base ghostscript --no-install-recommends
+          sudo apt-get update -y && sudo apt-get install -y strace r-base ghostscript --no-install-recommends
           gs --version #10.02.1
           strace -o foo -f R -e "bitmap('test.bmp')" || true
       - name: upload

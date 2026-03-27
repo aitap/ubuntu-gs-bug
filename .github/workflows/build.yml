@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  run:
     runs-on: ubuntu-24.04${{matrix.arch=='arm64' && '-arm' || ''}}
     strategy:
       fail-fast: false
@@ -13,5 +13,12 @@ jobs:
         arch: [ 'amd64', 'arm64' ]
     steps:
 
-      - name: Build and push
-        uses: docker/build-push-action@v6
+      - name: run
+        run: |
+          apt-get update -y && apt-get install -y strace r-base ghostscript --no-install-recommends
+          gs --version #10.02.1
+          strace -o foo -f R -e "bitmap('test.bmp')" || true
+      - name: upload
+        uses: actions/upload-artifact@v6
+        with:
+          path: foo

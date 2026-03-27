@@ -22,6 +22,3 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: ghcr.io/aitap/ubuntu-gs-bug:latest

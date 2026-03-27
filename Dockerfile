@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN sed -i '/^Types: deb$/s/deb/deb deb-src/' /etc/apt/sources.list.d/*.sources
-RUN apt-get update -y && apt-get install -y patch ghostscript --no-install-recommends && apt build-dep r-base
+RUN apt-get update -y && apt-get install -y patch ghostscript --no-install-recommends && apt -y build-dep r-base
 COPY foo.patch /
 RUN apt source r-base && cd r-base-* && patch -p0 </foo.patch && ./configure && make && make install
 RUN gs --version #10.02.1
